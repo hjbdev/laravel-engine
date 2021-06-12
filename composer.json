@@ -1,0 +1,19 @@
+{
+    "name": "hjbdev/former",
+    "description": "Laravel form generation based on models",
+    "require": {
+        "illuminate/support": "^8.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Harry",
+            "email": "harry@hjb.dev"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Former\\": "src/"
+        }
+    }
+}
