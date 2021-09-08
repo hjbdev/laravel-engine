@@ -1,33 +1,36 @@
 <?php
 
-namespace Former\Fields;
+namespace Engine\Fields;
 
 use Closure;
-use Former\Creatable;
+use Engine\Creatable;
+use Illuminate\Support\Str;
 
-abstract class Field 
+abstract class Field
 {
     use Creatable;
-    
+
     public $label;
     public $value;
     public $type;
     public $default;
+    public $name;
 
     public $creationRules;
     public $updateRules;
     public $rules;
 
-    
+
     public $visible = true;
     public $required = false;
 
     public function __construct($label)
     {
         $this->label = $label;
+        $this->name = Str::snake($label);
 
         if (!$this->type) {
-            throw new \Exception ('This field does not have a type defined.');
+            throw new \Exception('This field does not have a type defined.');
         }
     }
 
@@ -39,7 +42,7 @@ abstract class Field
      * @param mixed $value
      * @return $this
      */
-    public function required($key = true, $operator = null, $value = null)
+    public function required($key = true, $operator = null, $value = null) : Field
     {
         if (is_bool($key)) {
             $conditions = $key;
@@ -64,12 +67,10 @@ abstract class Field
      * @param mixed $value
      * @return $this
      */
-    public function visible($key = true, $operator = null, $value = null)
+    public function visible($key = true, $operator = null, $value = null) : Field
     {
-        if (is_bool($key)) {
+        if (is_bool($key) || $key instanceof Closure) {
             $conditions = $key;
-        } else if ($key instanceof Closure) {
-            $conditions = $key();
         } else {
             $conditions = [
                 [...func_get_args()]
@@ -82,38 +83,49 @@ abstract class Field
     }
 
     /**
+     * Set the field name
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function name(string $name) : Field
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
      * Set the default value for the field
      *
      * @param mixed $value
-     * @return void
+     * @return $this
      */
-    public function default($value)
+    public function default($value) : Field
     {
         $this->default = $value;
 
         return $this;
     }
 
-    public function creationRules(...$rules)
+    public function creationRules(...$rules) : Field
     {
         $this->creationRules = $rules;
-        
+
         return $this;
     }
 
-    public function updateRules(...$rules)
+    public function updateRules(...$rules) : Field
     {
         $this->updateRules = $rules;
 
         return $this;
     }
 
-    public function rules(...$rules)
+    public function rules(...$rules) : Field
     {
         $this->rules = $rules;
 
         return $this;
     }
-
-    
 }

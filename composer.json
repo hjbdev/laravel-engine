@@ -1,8 +1,9 @@
 {
-    "name": "hjbdev/former",
+    "name": "hjbdev/engine",
     "description": "Laravel form generation based on models",
     "require": {
-        "illuminate/support": "^8.0"
+        "illuminate/support": "^8.0",
+        "illuminate/http": "^8.0"
     },
     "license": "MIT",
     "authors": [
@@ -13,7 +14,18 @@
     ],
     "autoload": {
         "psr-4": {
-            "Former\\": "src/"
+            "Engine\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Engine\\ServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.18",
+        "pestphp/pest-plugin-mock": "^1.0"
     }
 }

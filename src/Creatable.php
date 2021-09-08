@@ -1,6 +1,6 @@
 <?php 
 
-namespace Former;
+namespace Engine;
 
 trait Creatable 
 {

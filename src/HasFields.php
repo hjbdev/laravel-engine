@@ -1,6 +1,6 @@
 <?php
 
-namespace Former;
+namespace Engine;
 
 trait HasFields
 {
@@ -11,5 +11,15 @@ trait HasFields
      */
     public function fields() {
         return [];
+    }
+
+    public function keyedFields() {
+        $fields = [];
+
+        foreach ($this->fields() as $field) {
+            $fields[$field->name] = $field;
+        }
+
+        return $fields;
     }
 }
