@@ -14,7 +14,7 @@ class FakeModel {
 }
 
 test('engine validates a request successfully', function () {
-    $model =  new FakeModel();
+    $model =  'FakeModel';
 
     $request = [
         'first_name' => null,
