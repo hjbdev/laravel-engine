@@ -24,4 +24,10 @@ test('engine validates a request successfully', function () {
     $fields = Engine::request($model, $request);
 
     expect($fields)->toHaveCount(1);
+
+    $request['first_name'] = 'Hello';
+
+    $fields = Engine::request($model, $request);
+
+    expect($fields)->toHaveCount(2);
 });
