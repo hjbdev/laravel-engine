@@ -63,3 +63,17 @@ test('field sets name based on dev input when specified', function () {
     $field = TestField::create('First Name')->name('last_name');
     expect($field->name)->toBe('last_name');
 });
+
+test('select field has options', function () {
+    $field = \Engine\Fields\Select::create('User Type')->options([
+        'admin' => 'Admin',
+        'moderator' => 'Moderator',
+        'regular' => 'Regular'
+    ]);
+
+    expect($field->options)->toBe([
+        'admin' => 'Admin',
+        'moderator' => 'Moderator',
+        'regular' => 'Regular'
+    ]);
+});

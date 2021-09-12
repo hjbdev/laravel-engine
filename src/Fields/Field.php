@@ -108,6 +108,12 @@ abstract class Field
         return $this;
     }
 
+    /**
+     * Set the create validation rules for the field
+     *
+     * @param mixed $rules
+     * @return $this
+     */
     public function creationRules(...$rules) : Field
     {
         $this->creationRules = $rules;
@@ -115,6 +121,12 @@ abstract class Field
         return $this;
     }
 
+    /**
+     * Set the update validation rules for the field
+     *
+     * @param mixed $rules
+     * @return $this
+     */
     public function updateRules(...$rules) : Field
     {
         $this->updateRules = $rules;
@@ -122,6 +134,12 @@ abstract class Field
         return $this;
     }
 
+    /**
+     * Set validation rules for the field
+     *
+     * @param mixed $rules
+     * @return $this
+     */
     public function rules(...$rules) : Field
     {
         $this->rules = $rules;
