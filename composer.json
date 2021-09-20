@@ -1,5 +1,5 @@
 {
-    "name": "hjbdev/engine",
+    "name": "hjbdev/laravel-engine",
     "description": "Laravel form generation based on models",
     "require": {
         "illuminate/support": "^8.0",
