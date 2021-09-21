@@ -32,11 +32,11 @@ trait HasFields
         foreach ($this->fields() as $field) {
             $fields[$field->name] = $field->rules;
 
-            if ($action === 'create') {
+            if ($action === 'create' && is_array($field->creationRules)) {
                 $fields[$field->name] = array_merge($fields[$field->name], $field->creationRules);
             }
 
-            if ($action === 'update') {
+            if ($action === 'update' && is_array($field->updateRules)) {
                 $fields[$field->name] = array_merge($fields[$field->name], $field->updateRules);
             }
         }
