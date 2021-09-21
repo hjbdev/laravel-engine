@@ -30,7 +30,7 @@ trait HasFields
         $rules = [];
 
         foreach ($this->fields() as $field) {
-            $fields[$field->name] = $field->validationRules;
+            $fields[$field->name] = $field->rules;
 
             if ($action === 'create') {
                 $fields[$field->name] = array_merge($fields[$field->name], $field->creationRules);
