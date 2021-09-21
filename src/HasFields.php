@@ -9,11 +9,13 @@ trait HasFields
      *
      * @return array
      */
-    public function fields() {
+    public function fields() 
+    {
         return [];
     }
 
-    public function keyedFields() {
+    public function keyedFields() 
+    {
         $fields = [];
 
         foreach ($this->fields() as $field) {
@@ -21,5 +23,24 @@ trait HasFields
         }
 
         return $fields;
+    }
+
+    public function validationRules($action = 'create') 
+    {
+        $rules = [];
+
+        foreach ($this->fields() as $field) {
+            $fields[$field->name] = $field->validationRules;
+
+            if ($action === 'create') {
+                $fields[$field->name] = array_merge($fields[$field->name], $field->creationRules);
+            }
+
+            if ($action === 'update') {
+                $fields[$field->name] = array_merge($fields[$field->name], $field->updateRules);
+            }
+        }
+
+        return $rules;
     }
 }
