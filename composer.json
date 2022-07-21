@@ -2,8 +2,8 @@
     "name": "hjbdev/laravel-engine",
     "description": "Laravel form generation based on models",
     "require": {
-        "illuminate/support": "^8.0",
-        "illuminate/http": "^8.0"
+        "illuminate/support": "^8.0|^9.0",
+        "illuminate/http": "^8.0|^9.0"
     },
     "license": "MIT",
     "authors": [
