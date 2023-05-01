@@ -2,8 +2,8 @@
     "name": "hjbdev/laravel-engine",
     "description": "Laravel form generation based on models",
     "require": {
-        "illuminate/support": "^8.0|^9.0",
-        "illuminate/http": "^8.0|^9.0"
+        "illuminate/support": "^8.0|^9.0|^10.0",
+        "illuminate/http": "^8.0|^9.0|^10.0"
     },
     "license": "MIT",
     "authors": [
@@ -27,5 +27,10 @@
     "require-dev": {
         "pestphp/pest": "^1.18",
         "pestphp/pest-plugin-mock": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
