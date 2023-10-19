@@ -4,7 +4,7 @@ namespace Engine\Fields;
 
 class File extends Field
 {
-    public $type = 'date-time';
+    public $type = 'file';
 
     public $limit = null;
 
