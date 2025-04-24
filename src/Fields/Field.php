@@ -47,7 +47,7 @@ abstract class Field
      * @param  mixed  $value
      * @return $this
      */
-    public function required($key = true, $operator = null, $value = null): self
+    public function required($key = true, $operator = null, $value = null): static
     {
         if (is_bool($key)) {
             $conditions = $key;
@@ -69,7 +69,7 @@ abstract class Field
      *
      * @return $this
      */
-    public function name(string $name): self
+    public function name(string $name): static
     {
         $this->name = $name;
 
@@ -82,7 +82,7 @@ abstract class Field
      * @param  mixed  $value
      * @return $this
      */
-    public function default($value): self
+    public function default($value): static
     {
         $this->default = $value;
 
@@ -95,7 +95,7 @@ abstract class Field
      * @param  mixed  $rules
      * @return $this
      */
-    public function creationRules(...$rules): self
+    public function creationRules(...$rules): static
     {
         $this->creationRules = $rules;
 
@@ -108,7 +108,7 @@ abstract class Field
      * @param  mixed  $rules
      * @return $this
      */
-    public function updateRules(...$rules): self
+    public function updateRules(...$rules): static
     {
         $this->updateRules = $rules;
 
@@ -121,7 +121,7 @@ abstract class Field
      * @param  mixed  $rules
      * @return $this
      */
-    public function rules(...$rules): self
+    public function rules(...$rules): static
     {
         $this->rules = $rules;
 

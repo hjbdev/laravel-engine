@@ -16,7 +16,7 @@ trait HasVisibility
      * @param  mixed  $value
      * @return $this
      */
-    public function visible($key = true, $operator = null, $value = null): self
+    public function visible($key = true, $operator = null, $value = null): static
     {
         if (is_bool($key) || $key instanceof Closure) {
             $conditions = $key;
