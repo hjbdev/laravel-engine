@@ -68,12 +68,12 @@ test('select field has options', function () {
     $field = \Engine\Fields\Select::create('User Type')->options([
         'admin' => 'Admin',
         'moderator' => 'Moderator',
-        'regular' => 'Regular'
+        'regular' => 'Regular',
     ]);
 
     expect($field->options)->toBe([
         'admin' => 'Admin',
         'moderator' => 'Moderator',
-        'regular' => 'Regular'
+        'regular' => 'Regular',
     ]);
 });

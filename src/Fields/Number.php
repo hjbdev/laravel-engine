@@ -7,13 +7,14 @@ class Number extends Field
     public $type = 'number';
 
     public $min;
+
     public $max;
+
     public $step;
 
     /**
      * Set the minimum value allowed
      *
-     * @param int|float $min
      * @return $this
      */
     public function min(int|float $min)
@@ -26,7 +27,6 @@ class Number extends Field
     /**
      * Set the maximum value allowed
      *
-     * @param int|float $max
      * @return $this
      */
     public function max(int|float $max)
@@ -35,11 +35,10 @@ class Number extends Field
 
         return $this;
     }
-    
+
     /**
      * Set the step value
      *
-     * @param int|float $step
      * @return $this
      */
     public function step(int|float $step)

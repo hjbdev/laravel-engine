@@ -19,15 +19,14 @@ class ServiceProvider extends SupportServiceProvider
         Route::macro('engine', function () {
             Route::post('/engine', function (Request $request) {
                 $request->validate([
-                    '_model' => 'string|required'
+                    '_model' => 'string|required',
                 ]);
 
                 $model = $request->get('_model');
 
-
                 if ($resolvedModel = Relation::getMorphedModel($model)) {
                     $model = $resolvedModel;
-                } else if (! class_exists($model)) {
+                } elseif (! class_exists($model)) {
                     throw new \Exception('The model provided is invalid');
                 }
 

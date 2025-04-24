@@ -11,10 +11,10 @@ class Select extends Field
     /**
      * Set the available options for the field
      *
-     * @param array $value
+     * @param  array  $value
      * @return $this
      */
-    public function options(array $options) : Select
+    public function options(array $options): Select
     {
         $this->options = $options;
 

@@ -23,7 +23,8 @@
     "require-dev": {
         "pestphp/pest": "^3.8",
         "orchestra/testbench": "^10.2",
-        "orchestra/pest-plugin-testbench": "^3.2"
+        "orchestra/pest-plugin-testbench": "^3.2",
+        "laravel/pint": "^1.22"
     },
     "config": {
         "allow-plugins": {

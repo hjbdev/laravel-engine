@@ -14,13 +14,14 @@ class Engine
         $this->model = $model;
     }
 
-    public static function request(string $model, Request|array $request) 
+    public static function request(string $model, Request|array $request)
     {
         $instance = new static($model);
+
         return $instance->processRequest($request);
     }
 
-    public function processRequest(Request|array $request) 
+    public function processRequest(Request|array $request)
     {
         // Get the request data
         if ($request instanceof Request) {
@@ -47,6 +48,7 @@ class Engine
                 if (empty($field->fields)) {
                     unset($fields[$key]);
                 }
+
                 continue;
             }
 
@@ -54,10 +56,11 @@ class Engine
             $conditions = $field->visible ?? true;
             $isVisible = $this->checkConditions($conditions, $request);
 
-            if (!$isVisible) {
+            if (! $isVisible) {
                 unset($fields[$key]);
             }
         }
+
         return $fields;
     }
 
@@ -66,10 +69,10 @@ class Engine
         if (is_bool($conditions)) {
             // If it's a hardcoded boolean, return it.
             return $conditions;
-        } else if (is_callable($conditions)) {
+        } elseif (is_callable($conditions)) {
             // If it's a closure, return it, given the full request.
             return $conditions($request);
-        } else if (is_array($conditions)) {
+        } elseif (is_array($conditions)) {
             // This should be an array of conditions, we need to do some checking here.
             // loop through the conditions
             foreach ($conditions as $condition) {
@@ -80,21 +83,30 @@ class Engine
                     } else {
                         return false;
                     }
-                } else if (count($condition) === 3) {
+                } elseif (count($condition) === 3) {
                     // three elements, middle is operator
                     switch ($condition[1]) {
                         default:
                         case '=':
-                        case '==':  $result = $request[$condition[0]] ?? null == $condition[2]; break;
+                        case '==':  $result = $request[$condition[0]] ?? $condition[2] == null;
+                            break;
                         case '!=':
-                        case '<>':  $result = $request[$condition[0]] ?? null != $condition[2]; break;
-                        case '<':   $result = $request[$condition[0]] ?? null < $condition[2]; break;
-                        case '>':   $result = $request[$condition[0]] ?? null > $condition[2]; break;
-                        case '<=':  $result = $request[$condition[0]] ?? null <= $condition[2]; break;
-                        case '>=':  $result = $request[$condition[0]] ?? null >= $condition[2]; break;
-                        case '===': $result = $request[$condition[0]] ?? null === $condition[2]; break;
-                        case '!==': $result = $request[$condition[0]] ?? null !== $condition[2]; break;
+                        case '<>':  $result = $request[$condition[0]] ?? $condition[2] != null;
+                            break;
+                        case '<':   $result = $request[$condition[0]] ?? $condition[2] > null;
+                            break;
+                        case '>':   $result = $request[$condition[0]] ?? $condition[2] < null;
+                            break;
+                        case '<=':  $result = $request[$condition[0]] ?? $condition[2] >= null;
+                            break;
+                        case '>=':  $result = $request[$condition[0]] ?? $condition[2] <= null;
+                            break;
+                        case '===': $result = $request[$condition[0]] ?? $condition[2] === null;
+                            break;
+                        case '!==': $result = $request[$condition[0]] ?? $condition[2] !== null;
+                            break;
                     }
+
                     return $result;
                 }
             }
@@ -102,5 +114,4 @@ class Engine
 
         return false;
     }
-
 }

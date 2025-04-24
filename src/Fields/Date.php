@@ -11,7 +11,6 @@ class Date extends Field
     /**
      * Set the earliest date allowed. Must be in Y-m-d format.
      *
-     * @param string|Carbon $min
      * @return $this
      */
     public function min(string|Carbon $min)
@@ -28,7 +27,7 @@ class Date extends Field
     /**
      * Set the latest date allowed. Must be in Y-m-d format.
      *
-     * @param int|float $max
+     * @param  int|float  $max
      * @return $this
      */
     public function max(string|Carbon $max)

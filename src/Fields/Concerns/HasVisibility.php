@@ -11,9 +11,9 @@ trait HasVisibility
     /**
      * Set whether the field is visible
      *
-     * @param mixed $key
-     * @param mixed $operator
-     * @param mixed $value
+     * @param  mixed  $key
+     * @param  mixed  $operator
+     * @param  mixed  $value
      * @return $this
      */
     public function visible($key = true, $operator = null, $value = null): self
@@ -22,7 +22,7 @@ trait HasVisibility
             $conditions = $key;
         } else {
             $conditions = [
-                [...func_get_args()]
+                [...func_get_args()],
             ];
         }
 

@@ -11,7 +11,7 @@ class File extends Field
     /**
      * Set the limit of how many files are allowed.
      *
-     * @param bool $value
+     * @param  bool  $value
      * @return $this
      */
     public function limit($limit = null)

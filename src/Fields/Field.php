@@ -12,15 +12,20 @@ abstract class Field
     use Creatable, HasVisibility;
 
     public $label;
+
     public $value;
+
     public $type;
+
     public $default;
+
     public $name;
 
     public $creationRules;
-    public $updateRules;
-    public $rules;
 
+    public $updateRules;
+
+    public $rules;
 
     public $required = false;
 
@@ -29,7 +34,7 @@ abstract class Field
         $this->label = $label;
         $this->name = Str::snake($label);
 
-        if (!$this->type) {
+        if (! $this->type) {
             throw new \Exception('This field does not have a type defined.');
         }
     }
@@ -37,20 +42,20 @@ abstract class Field
     /**
      * Set whether the field is required
      *
-     * @param mixed $key
-     * @param mixed $operator
-     * @param mixed $value
+     * @param  mixed  $key
+     * @param  mixed  $operator
+     * @param  mixed  $value
      * @return $this
      */
-    public function required($key = true, $operator = null, $value = null) : Field
+    public function required($key = true, $operator = null, $value = null): self
     {
         if (is_bool($key)) {
             $conditions = $key;
-        } else if ($key instanceof Closure) {
+        } elseif ($key instanceof Closure) {
             $conditions = $key();
         } else {
             $conditions = [
-                [...func_get_args()]
+                [...func_get_args()],
             ];
         }
 
@@ -62,10 +67,9 @@ abstract class Field
     /**
      * Set the field name
      *
-     * @param string $name
      * @return $this
      */
-    public function name(string $name) : Field
+    public function name(string $name): self
     {
         $this->name = $name;
 
@@ -75,10 +79,10 @@ abstract class Field
     /**
      * Set the default value for the field
      *
-     * @param mixed $value
+     * @param  mixed  $value
      * @return $this
      */
-    public function default($value) : Field
+    public function default($value): self
     {
         $this->default = $value;
 
@@ -88,10 +92,10 @@ abstract class Field
     /**
      * Set the create validation rules for the field
      *
-     * @param mixed $rules
+     * @param  mixed  $rules
      * @return $this
      */
-    public function creationRules(...$rules) : Field
+    public function creationRules(...$rules): self
     {
         $this->creationRules = $rules;
 
@@ -101,10 +105,10 @@ abstract class Field
     /**
      * Set the update validation rules for the field
      *
-     * @param mixed $rules
+     * @param  mixed  $rules
      * @return $this
      */
-    public function updateRules(...$rules) : Field
+    public function updateRules(...$rules): self
     {
         $this->updateRules = $rules;
 
@@ -114,10 +118,10 @@ abstract class Field
     /**
      * Set validation rules for the field
      *
-     * @param mixed $rules
+     * @param  mixed  $rules
      * @return $this
      */
-    public function rules(...$rules) : Field
+    public function rules(...$rules): self
     {
         $this->rules = $rules;
 

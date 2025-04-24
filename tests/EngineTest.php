@@ -1,25 +1,28 @@
 <?php
 
 use Engine\Engine;
-use Engine\Fields\Text;
 use Engine\Fields\Group;
+use Engine\Fields\Text;
 
-class FakeModel {
+class FakeModel
+{
     use \Engine\HasFields;
-    public function fields() {
+
+    public function fields()
+    {
         return [
             Text::create('First Name'),
-            Text::create('Last Name')->visible('first_name', '!=', null)
+            Text::create('Last Name')->visible('first_name', '!=', null),
         ];
     }
 }
 
 test('engine validates a request successfully', function () {
-    $model =  'FakeModel';
+    $model = 'FakeModel';
 
     $request = [
         'first_name' => null,
-        'last_name' => null
+        'last_name' => null,
     ];
 
     $fields = Engine::request($model, $request);
@@ -35,9 +38,12 @@ test('engine validates a request successfully', function () {
 
 test('engine handles groups and field visibility inside groups', function () {
     // Model with groups
-    class GroupedModel {
+    class GroupedModel
+    {
         use \Engine\HasFields;
-        public function fields() {
+
+        public function fields()
+        {
             return [
                 Group::create('Personal', [
                     Text::create('First Name'),
@@ -66,9 +72,12 @@ test('engine handles groups and field visibility inside groups', function () {
     expect($fields['personal']->fields[1]->label)->toBe('Last Name');
 
     // If all fields in a group are hidden, the group should be removed
-    class EmptyGroupModel {
+    class EmptyGroupModel
+    {
         use \Engine\HasFields;
-        public function fields() {
+
+        public function fields()
+        {
             return [
                 Group::create('Hidden', [
                     Text::create('Hidden Field')->visible(false),

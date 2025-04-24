@@ -12,6 +12,18 @@ class Group
 
     public $name;
 
+    /**
+     * Set the group name
+     *
+     * @return $this
+     */
+    public function name(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function __construct(
         public string $label,
         public array $fields = [],

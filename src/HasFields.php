@@ -9,12 +9,12 @@ trait HasFields
      *
      * @return array
      */
-    public function fields() 
+    public function fields()
     {
         return [];
     }
 
-    public function keyedFields() 
+    public function keyedFields()
     {
         $fields = [];
 
@@ -25,7 +25,7 @@ trait HasFields
         return $fields;
     }
 
-    public function validationRules($action = 'create') 
+    public function validationRules($action = 'create')
     {
         $rules = [];
 

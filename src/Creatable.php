@@ -1,13 +1,13 @@
-<?php 
+<?php
 
 namespace Engine;
 
-trait Creatable 
+trait Creatable
 {
     /**
      * Create a new instance
      *
-     * @param any ...$arguments
+     * @param  any  ...$arguments
      * @return static
      */
     public static function create(...$arguments)
