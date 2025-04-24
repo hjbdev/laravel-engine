@@ -55,5 +55,8 @@
             "@clear",
             "@php vendor/bin/pest"
         ]
+    },
+    "require": {
+        "illuminate/support": "^10.0|^11.0|^12.0"
     }
 }

@@ -39,7 +39,7 @@ test('engine handles groups and field visibility inside groups', function () {
         use \Engine\HasFields;
         public function fields() {
             return [
-                Group::make('Personal', [
+                Group::create('Personal', [
                     Text::create('First Name'),
                     Text::create('Last Name')->visible('show_last', '=', true),
                 ]),
@@ -54,23 +54,23 @@ test('engine handles groups and field visibility inside groups', function () {
     $request = ['show_last' => false];
     $fields = Engine::request($model, $request);
     expect($fields)->toHaveCount(2);
-    expect($fields[0])->toBeInstanceOf(Group::class);
-    expect($fields[0]->fields)->toHaveCount(1);
-    expect($fields[0]->fields[0]->label)->toBe('First Name');
-    expect($fields[1]->label)->toBe('Email');
+    expect($fields['personal'])->toBeInstanceOf(Group::class);
+    expect($fields['personal']->fields)->toHaveCount(1);
+    expect($fields['personal']->fields[0]->label)->toBe('First Name');
+    expect($fields['email']->label)->toBe('Email');
 
     // Both fields in the group should be visible
     $request = ['show_last' => true];
     $fields = Engine::request($model, $request);
-    expect($fields[0]->fields)->toHaveCount(2);
-    expect($fields[0]->fields[1]->label)->toBe('Last Name');
+    expect($fields['personal']->fields)->toHaveCount(2);
+    expect($fields['personal']->fields[1]->label)->toBe('Last Name');
 
     // If all fields in a group are hidden, the group should be removed
     class EmptyGroupModel {
         use \Engine\HasFields;
         public function fields() {
             return [
-                Group::make('Hidden', [
+                Group::create('Hidden', [
                     Text::create('Hidden Field')->visible(false),
                 ]),
                 Text::create('Visible'),
@@ -80,5 +80,5 @@ test('engine handles groups and field visibility inside groups', function () {
     $model = 'EmptyGroupModel';
     $fields = Engine::request($model, []);
     expect($fields)->toHaveCount(1);
-    expect($fields[0]->label)->toBe('Visible');
+    expect($fields['visible']->label)->toBe('Visible');
 });
