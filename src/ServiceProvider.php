@@ -9,7 +9,12 @@ use Illuminate\Support\ServiceProvider as SupportServiceProvider;
 
 class ServiceProvider extends SupportServiceProvider
 {
-    public function boot() 
+    public function boot()
+    {
+        $this->registerRouteMacro();
+    }
+
+    protected function registerRouteMacro(): void
     {
         Route::macro('engine', function () {
             Route::post('/engine', function (Request $request) {
@@ -22,12 +27,10 @@ class ServiceProvider extends SupportServiceProvider
 
                 if ($resolvedModel = Relation::getMorphedModel($model)) {
                     $model = $resolvedModel;
-                } else if(class_exists($model)) {
-                    // 
-                } else {
+                } else if (! class_exists($model)) {
                     throw new \Exception('The model provided is invalid');
                 }
-            
+
                 return Engine::request($model, $request);
             });
         });
