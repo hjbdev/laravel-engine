@@ -2,6 +2,7 @@
 
 namespace Engine;
 
+use Engine\Fields\Group;
 use Illuminate\Http\Request;
 
 class Engine
@@ -30,22 +31,33 @@ class Engine
         $model = $this->model;
         $fields = (new $model)->keyedFields();
 
-        foreach ($request as $key => $value) 
-        {
+        // Recursively process fields and groups
+        $fields = $this->processFieldsOrGroups($fields, $request);
+
+        return $fields;
+    }
+
+    protected function processFieldsOrGroups(array $fields, array $request)
+    {
+        foreach ($fields as $key => $field) {
+            if ($field instanceof Group && isset($field->fields)) {
+                // Recursively process group fields
+                $field->fields = $this->processFieldsOrGroups($field->fields, $request);
+                // Remove group if all its fields are hidden
+                if (empty($field->fields)) {
+                    unset($fields[$key]);
+                }
+                continue;
+            }
+
             // Retrieve the field definition
-            $field = $fields[$key] ?? false;
-            // If we don't have a definition, continue the loop.
-            if (!$field) continue;
-
-            $conditions = $field->visible;
-
+            $conditions = $field->visible ?? true;
             $isVisible = $this->checkConditions($conditions, $request);
 
             if (!$isVisible) {
                 unset($fields[$key]);
             }
         }
-
         return $fields;
     }
 

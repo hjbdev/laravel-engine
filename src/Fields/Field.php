@@ -4,11 +4,12 @@ namespace Engine\Fields;
 
 use Closure;
 use Engine\Creatable;
+use Engine\Fields\Concerns\HasVisibility;
 use Illuminate\Support\Str;
 
 abstract class Field
 {
-    use Creatable;
+    use Creatable, HasVisibility;
 
     public $label;
     public $value;
@@ -21,7 +22,6 @@ abstract class Field
     public $rules;
 
 
-    public $visible = true;
     public $required = false;
 
     public function __construct($label)
@@ -55,29 +55,6 @@ abstract class Field
         }
 
         $this->required = $conditions;
-
-        return $this;
-    }
-
-    /**
-     * Set whether the field is visible
-     *
-     * @param mixed $key
-     * @param mixed $operator
-     * @param mixed $value
-     * @return $this
-     */
-    public function visible($key = true, $operator = null, $value = null) : Field
-    {
-        if (is_bool($key) || $key instanceof Closure) {
-            $conditions = $key;
-        } else {
-            $conditions = [
-                [...func_get_args()]
-            ];
-        }
-
-        $this->visible = $conditions;
 
         return $this;
     }
